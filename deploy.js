@@ -22,7 +22,7 @@ function installPM2() {
 // transfers local project to the remote server
 function transferProjectToRemote(failed, successful) {
   return ssh.putDirectory(
-    '../riot-express-todo-list',
+    '../hackathon-starter',
     '/home/ubuntu/riot-express-todo-list-temp',
     {
       recursive: true,
@@ -49,7 +49,7 @@ function transferProjectToRemote(failed, successful) {
 // creates a temporary folder on the remote server
 function createRemoteTempFolder() {
   return ssh.execCommand(
-    'rm -rf riot-express-list-temp && mkdir riot-express-list-temp', {
+    'rm -rf riot-express-todo-list-temp && mkdir riot-express-todo-list-temp', {
       cwd: '/home/ubuntu'
   });
 }
@@ -70,11 +70,11 @@ function updateRemoteApp() {
   });
 }
 
-// // restart mongodb and node services on the remote server
+// restart mongodb and node services on the remote server
 function restartRemoteServices() {
-    return ssh.execCommand(
-      'cd riot-express-todo-list && sudo service mongod start && pm2 start app.js', {
-        cwd: '/home/ubuntu'
+  return ssh.execCommand(
+    'cd riot-express-todo-list && sudo service mongod start && pm2 start app.js', {
+      cwd: '/home/ubuntu'
   });
 }
 
@@ -85,9 +85,9 @@ function sshConnect() {
   ssh
     .connect({
       // TODO: ADD YOUR IP ADDRESS BELOW (e.g. '12.34.5.67')
-      host: '3.95.24.169',
+      host: '3.87.53.120',
       username: 'ubuntu',
-      privateKey: 'workshops-key.pem'
+      privateKey: 'hs-keys.pem'
     })
     .then(function() {
       console.log('SSH Connection established.');
